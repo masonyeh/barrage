@@ -228,8 +228,7 @@
              && __self.sendMsg(message)
              && $('#message').val('')
              && $('.barrage').hide()
-             && $('#message').blur()
-             && MtaH5.clickStat('senddm',{'write':'true'});
+             && $('#message').blur();
        });
 
        $('.msg').on('touchend',function(e){
@@ -240,13 +239,12 @@
 
        $("#message").on('focus',function(e){
           $('.barrage').show()
-          && MtaH5.clickStat('touchin',{'write':'true'});
        });
 
        $('.barrage p,.barrage span').on('touchend',function(e){
          $('#message').val($(this).html());
        });
- 
+
        //接收到消息事件
        __self.Socket.on('chat message', function(msg){
          __self.receiveMsg(msg);
