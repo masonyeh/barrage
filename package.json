@@ -1,0 +1,23 @@
+{
+  "name": "mooncake",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "express": "^4.10.2",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "request": "^2.74.0",
+    "socket.io": "^1.2.0",
+    "xss": "^0.2.13"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.ersoft.cn:7999/isleep/mooncake.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

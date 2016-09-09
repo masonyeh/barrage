@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1,user-scalable=0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="x5-orientation" content="portrait"></meta>
+    <title>H5弹幕</title>
+    <link rel="stylesheet" href="./index.css" type="text/css" class="">
+
+</head>
+<body ontouchstart="">
+    <!--背景图-->
+    <section class="image-contaier">
+        <div class="touch">
+            <div class="image1 frist">
+            </div>
+            <div class="image2">
+              <img src="#"/>
+            </div>
+
+        </div>
+        <div class="msg"></div>
+    </section>
+    <div class="music">
+        <span id="on">
+            <img src="./images/music-on.gif">
+        </span>
+        <span id="off">
+            <img src="./images/music-off.png">
+        </span>
+        <audio id="music-audio" loop="loop" autoplay="autoplay">
+            <source src="./images/music.mp3" type="audio/mpeg" />
+        </audio>
+    </div>
+
+    <!--弹幕-->
+    <section class="barrage-contaier">
+
+        <div class="bar-form">
+          <form action="#" id="msgForm">
+            <div class="bar-input">
+                <input type="text" value="" id="message"  placeholder="说点自己的看法吧！" maxlength="17" />
+            </div>
+            <div class="bar-submit">
+                <button  type="submit">发送弹幕</button>
+            </div>
+          </form>
+        </div>
+    </section>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+    <script src="./index.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+/*样式初始化*/
+*{
+    margin: 0;  padding:0;
+}
+ul,li{
+    list-style: none;
+    tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+li:active{
+    background: #EEEEEE;
+}
+a{
+    text-decoration: none;
+}
+a:active{
+    text-decoration: none;
+}
+body{
+    -moz-user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: PingFangSC-Regular, sans-serif;
+    background: #222222;
+}
+/**/
+html,body{width: 100%;height: 100%;}
+.image-contaier{
+    position: relative;top: 0;left: 0;z-index: 100;
+    width: 100%;height: 100%;overflow: hidden;
+}
+.touch,.touch div{
+    position: absolute;left: 0;
+    width: 100%;height: 100%;background-repeat: no-repeat;background-position: center;background-size: cover;
+}
+.image-contaier .image1{
+    background-image: url('./images/frist.jpg');
+    top:0;
+}
+.image-contaier img{
+    width: 100%;
+}
+.join-isleep{
+    position: absolute;top:54%;left:18%;width: 64%;z-index: 200;height: 140px;
+    display: none;
+ }
+.join-isleep .rabbits{
+    position: absolute;left: -6%;
+    bottom: 42px;width: 28%;
+}
+.join-isleep p{
+    width: 100%;height: 60px;margin-top: 70px;
+    background-image: url("./images/join.png");
+    background-repeat:no-repeat;background-size:100% auto ;background-position: center;
+}
+.join-isleep p:active{
+    background-image: url("./iamges/join-active.png");
+}
+/*odd奇数 even偶数*/
+.touch div:nth-child(even) img{
+    display: none;
+}
+.touch div:nth-child(odd) img{
+    opacity: 0;
+}
+
+/*音乐*/
+.music{
+    position: fixed;
+    top: 32px;right: 14px;width: 28px;height: 28px;z-index:999;
+}
+.music span{
+    width: 28px;height: 28px;
+}
+.music span img{
+    width: 100%;
+}
+.music span#on{
+    display: block; -webkit-box-sizing:border-box;box-sizing: border-box;
+    border: 3px #000000 solid;border-radius: 14px;background: #ffffff;
+}
+.music span#on img{
+
+}
+.music span#off{
+    display: none;
+}
+
+/*弹幕消息*/
+.msg{
+  position: relative;z-index:1001;
+  width:100%;height:100%;position:absolute;top:0;left:0;
+}
+.msg div{
+  font-size:14px;line-height:30px;font-weight:500;
+  color:#fff;position:absolute;left:0;top:0;text-indent: 5px;white-space: nowrap;
+  background: rgba(0,0,0,0.5);border-radius: 5px;padding: 0px 5px 0px 5px;
+}
+
+/*弹幕*/
+.barrage-contaier{
+    position: fixed;left: 0;bottom: 20px;width: 100%;z-index: 1002;
+}
+.bar-form{
+    width: 96%;height: 38px;margin: 0 auto;
+}
+.bar-input{
+    width: 78%;height: 38px;float: left;
+    background: url("./images/input.png") no-repeat;background-size:100% 100%;background-position:center ;
+}
+.bar-input input{
+    display: block;width: 96%;margin: 2px auto;height: 30px;padding-left:3% ;
+    border: none;background: none;font-size: 12px;color: #666;
+}
+.bar-submit{
+    float: right;width: 20%;height: 38px;
+    background: url("./images/submit.png") no-repeat;background-size:100% 100%;background-position:center ;
+}
+.bar-submit button{
+    color: #ffffff;width: 100%;height: 34px;line-height: 34px;text-align: center;border: none;background: none;
+    font-size: 14px;
+}
+.bar-submit button:active{
+    color: #000000;
+} 
