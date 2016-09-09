@@ -29,7 +29,6 @@ io.on('connection', function(socket){
 
     var rmsg = repWord?msg.replace(repWord,'***'):msg;
     io.emit('chat message', {userId:data.userId,msg:rmsg});
-    msgLog(data.userId,msg);
   });
 
   socket.on('disconnect', function(msg){
@@ -41,24 +40,3 @@ io.on('connection', function(socket){
 var server = http.listen(config.port, function(){
   console.log('listening on *:'+config.port);
 });
-
-
-function msgLog(userId,content){
-
-    var options = {
-          uri: config.url+'/isleep/mid-autumn/festival/send/message',
-          method: 'POST',
-          json: {
-            userid:userId,
-            type:'',
-            content:content
-          }
-        };
-
-        request(options, function (error, response, body) {
-          if (!error && response.statusCode == 200) {
-            // console.log(response); // Print the shortened url.
-            console.log('msg:',content);
-          }
-        });
-}

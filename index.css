@@ -120,4 +120,23 @@ html,body{width: 100%;height: 100%;}
 }
 .bar-submit button:active{
     color: #000000;
-} 
+}
+
+/*.msg  .test{
+    position: absolute;top:200px;
+          -webkit-animation:loading-progress 10s ease-in forwards ;
+          animation-direction:alternate;
+          -webkit-animation-direction:alternate;
+        }
+
+        @keyframes loading-progress
+   		 {
+   			 from {left:100%;}
+   			 to {left:0%;}
+   		 }
+
+   		 @-webkit-keyframes loading-progress
+   		 {
+   			 from {left:100%;}
+   			 to {left:-100px;}
+   		 }*/

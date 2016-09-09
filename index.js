@@ -19,7 +19,7 @@
         this.getOtherMsg(function(){
           __self.setConfig();
           __self.bindEvent();
-          __self.arrange();
+          // __self.arrange();
         });
 
      },
