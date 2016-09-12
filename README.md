@@ -3,8 +3,11 @@
 说明:
 通信:websocket
 动画:CSS3 Animation
-	注:原本动画是使用jquery Animate实现的，后面发现jquery使用position:absolute 不停地修改left值,页面出现大量的重排重绘，消耗大量的性能，于是使用了css3 animation特性实现它；更好的方法是使用Canvas实现；
-以上三种方式：1.postion:absolute 2.css3 animation 3.Canvas 在低配安卓机下都会出现跳帧情况；
+
+	注:原本动画是使用jquery Animate实现的，后面发现jquery使用position:absolute
+	不停地修改left值,页面出现大量的重排重绘，消耗大量的性能，于是使用了css3
+	animation特性实现它；更好的方法是使用Canvas实现；
+	以上三种方式：1.postion:absolute 2.css3 animation 3.Canvas 在低配安卓机下都会出现跳帧情况；
 
 ##动画调优的策略与技巧##
 	提升每一帧性能（缩短帧时长，提高帧率）
