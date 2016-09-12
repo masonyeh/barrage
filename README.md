@@ -33,7 +33,7 @@
 
 ###安装步骤
 	第一步
-	node install
+	npm install &&　node .
 
 	第二步
 	http://localhost:3000
