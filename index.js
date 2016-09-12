@@ -1,4 +1,4 @@
-
+javascript:(function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();document.body.appendChild(stats.dom);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='//rawgit.com/mrdoob/stats.js/master/build/stats.min.js';document.head.appendChild(script);})()
     //弹幕
    var Barrage = {
      Socket   :io(), //Socket对象
@@ -13,13 +13,14 @@
      userId   :0,     //用户Id
      winWidth :0,     //当前窗口宽
      duration :12000, //一条弹幕运作时间
+     head     : null, //head对象
      //初始化
      init:function(){
         var __self = this;
         this.getOtherMsg(function(){
           __self.setConfig();
           __self.bindEvent();
-          // __self.arrange();
+          __self.arrange();
         });
 
      },
@@ -39,9 +40,11 @@
         }
         //设置USER信息
         this.setUser();
-
         //设置窗口高度属性
         this.winWidth = $(window).width();
+
+        //获取head对象
+        this.head = document.head|| document.getElementByTagName('head')[0];
      },
 
      getOtherMsg:function(callback){
@@ -144,6 +147,101 @@
       this.shootMsg(msg,this.getRowY(),__self.duration);
      },
 
+     //创建styleSheet
+     createStyle:function(id,css){
+
+       var style    = document.createElement('style');
+          style.type='text/css';
+
+       if(style.styleSheet){
+         style.styleSheet.cssText=css;
+       }else{
+         style.appendChild(document.createTextNode(css));
+       }
+       style.id=id;
+
+       this.head.appendChild(style);
+     },
+
+     //css3Animation特效
+     css3Animation:function(msg,rowY,time,curMsg){
+       var __self = this;
+
+       curMsg.css({left:this.winWidth,top:rowY});
+       var styleId = Math.floor(Math.random()*((10000000000000-1)-1)+1);
+       left = (curMsg.width())+10;
+       var keyframes= " @keyframes b-animate {"+
+                      "       from {left:"+this.winWidth+"px}"+
+                      "       to{left:-"+left+"px}"+
+                      "     }"+
+                      "     @-webkit-keyframes b-animate {"+
+                      "       from {left:"+this.winWidth+"px}"+
+                      "       to{left:-"+left+"px}"+
+                      "     }",
+             animate="b-animate 10s linear";
+
+      this.createStyle(styleId,keyframes);
+      curMsg = curMsg.length?curMsg[0]:curMsg;
+
+      curMsg.style.webkitAnimation=animate;
+      curMsg.style.animation      =animate;
+      curMsg.setAttribute('styleId',styleId);
+      curMsg.setAttribute('top',rowY);
+
+      function whichAnimationEvent(){
+            var t,
+                el    = document.createElement('surface'),
+            animation = {
+              'animation'       :'animationend',
+              'WebkitAnimation' :'webkitAnimationEnd'
+            }
+
+            for(t in animation){
+                if( el.style[t] !== undefined ){
+                    return animation[t];
+                }
+            }
+      }
+
+      var animationEvent = whichAnimationEvent();
+      animationEvent && curMsg.addEventListener(animationEvent, function(event) {
+          //动画结束回调事件
+            var top = this.getAttribute('top'),
+              index = __self.curRowsY.indexOf(parseInt(top));
+
+              index>=0 && delete __self.curRowsY[index];
+             __self.curCount--;
+
+            var styleTag = document.getElementById(this.getAttribute('styleId'));
+            styleTag.parentNode.removeChild(styleTag);
+            this.removeEventListener(animationEvent,arguments.callee,false);//销毁事件
+            this.parentNode.removeChild(this);
+      });
+
+     },
+
+     //jquery动画
+     jqueryAnimation:function(msg,rowY,time,curMsg){
+        // var __self = this;
+        // var left = left = (curMsg.width())+10;
+        // curMsg.css({left:__self.winWidth,top:rowY});
+        // curMsg.animate(
+        //    {left:"-"+left+"px"},
+        //    {
+        //       duration:time,
+        //       speed:'slow',
+        //       easing:'linear',
+        //       done:function(animation,jumpedToEnd){
+        //
+        //         var top = $(this)[0].offsetTop,
+        //           index = __self.curRowsY.indexOf(top);
+        //
+        //           index>=0 && delete __self.curRowsY[index];
+        //          __self.curCount--;
+        //          $(this).remove();
+        //       }
+        //    });
+     },
      //发射消息到屏幕中
      shootMsg:function(msg,rowY,time){
        var __self = this;
@@ -151,27 +249,10 @@
        this.curRowsY.push(rowY);
        $(".msg").append("<div>"+msg+"&nbsp;</div>");
 
-       var curMsg = $(".msg").find('div:last-child'),
-             left = (curMsg.width())+10;
+       var curMsg = $(".msg").find('div:last-child');
 
-       curMsg.css({left:__self.winWidth,top:rowY});
-       curMsg.animate(
-          {left:"-"+left+"px"},
-          {
-             duration:time,
-             speed:'slow',
-             easing:'linear',
-             done:function(animation,jumpedToEnd){
-
-               var top = $(this)[0].offsetTop,
-                 index = __self.curRowsY.indexOf(top);
-
-                 index>=0 && delete __self.curRowsY[index];
-                __self.curCount--;
-                $(this).remove();
-             }
-          });
-
+      this.css3Animation(msg,rowY,time,curMsg);
+      // this.jqueryAnimation(msg,rowY,time,curMsg);
      },
 
      //收到消息-DOM
